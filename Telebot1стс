@@ -1,0 +1,117 @@
+import telebot
+from telebot import types
+
+bot = telebot.TeleBot("6002000438:AAHVeKOKhbsKPyNT_617VOUwvQ6L9ysUUcw")
+
+@bot.message_handler(commands=['start'])
+def start(msg: types.Message):
+    key = types.InlineKeyboardMarkup()
+    btn1 = types.InlineKeyboardButton("Bot's Options", callback_data="bot_option")
+    key.add(btn1)
+    bot.send_message(chat_id=msg.chat.id, text="Click the button to see more:", reply_markup=key)
+
+@bot.callback_query_handler(func=lambda call: call.data == 'bot_option')
+def bot_option(call: types.CallbackQuery):
+    key = types.InlineKeyboardMarkup()
+    btn1 = types.InlineKeyboardButton("📖 Quotes", callback_data="quotes")
+    btn2 = types.InlineKeyboardButton("❓ Help", callback_data="help")
+    btn3 = types.InlineKeyboardButton("📜 About Bot", callback_data="about")
+    key.add(btn1)
+    key.add(btn2)
+    key.add(btn3)
+    text = "Hi \nI'm the bot where you can find Quotes for your heart!\nClick the 📖 Quotes button.\nGood luck to find Quotes."
+    bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.id, text=text, reply_markup=key)
+
+@bot.callback_query_handler(func=lambda call: True)
+def quotes(call):   
+    if call.data == "quotes":
+        key = types.InlineKeyboardMarkup()
+        btn1 = types.InlineKeyboardButton(text='Business', callback_data='buss')
+        btn2 = types.InlineKeyboardButton(text='Love', callback_data='love')
+        btn3 = types.InlineKeyboardButton(text='Friends', callback_data='fried')
+        btn4 = types.InlineKeyboardButton(text='Motivation', callback_data='motiv')
+        btn0 = types.InlineKeyboardButton(text='Back to the main', callback_data='back_1')
+        key.add(btn1,btn2)
+        key.add(btn3,btn4)
+        key.add(btn0)
+        text1 = 'Choose the category of 📖 Quotes:'
+        bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.id, text=text1, reply_markup=key)
+    
+    elif call.data == 'buss':
+        key = types.InlineKeyboardMarkup()
+        btn1 = types.InlineKeyboardButton(text='“It’s not about ideas. It’s about making ideas happen.”\n- Scott Belsky', callback_data='a')
+        btn2 = types.InlineKeyboardButton(text='“If you can’t feed a team with two pizzas, it’s too large.”\n- Jeff Bezos', callback_data='b')
+        btn3 = types.InlineKeyboardButton(text='“If people like you, they’ll listen to you, but if they trust you, they’ll do business with you.”\n- Zig Ziglar', callback_data='c')
+        btn4 = types.InlineKeyboardButton(text='“Make every detail perfect and limit the number of details to perfect.”\n- Jack Dorsey', callback_data='d')
+        btn0 = types.InlineKeyboardButton(text='Back to the main', callback_data='back_1.1')
+        key.add(btn0)
+        text2_1 = '1.“It’s not about ideas. It’s about making ideas happen.” - Scott Belsky\n'
+        text2_2 = '2.“If you can’t feed a team with two pizzas, it’s too large.” - Jeff Bezos\n'
+        text2_3 = '3.“If people like you, they’ll listen to you, but if they trust you, they’ll do business with you.” - Zig Ziglar\n'
+        text2_4 = '4.“Make every detail perfect and limit the number of details to perfect.”\n- Jack Dorsey'
+        text2 = text2_1 + text2_2 + text2_3 + text2_4
+        bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.id, text=text2, reply_markup=key)
+    elif call.data == 'love':
+        key = types.InlineKeyboardMarkup()
+        btn0 = types.InlineKeyboardButton(text='Back to the main', callback_data='back_1.2')
+        key.add(btn0)
+        text3_1 = '1.“Life is the flower for which love is the honey.” - Victor Hugo\n'
+        text3_2 = '2.“Age does not protect you from love, but love to some extent protects you from age.” - Jeanne Moreau\n'
+        text3_3 = '3.“We accept the love we think we deserve.” - Stephen Chbosky\n'
+        text3_4 = '4.“Better to have loved and lost, than to have never loved at all.” - St. Augustine'
+        text3 = text3_1,text3_2,text3_3,text3_4
+        bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.id, text=text3, reply_markup=key)
+    elif call.data == 'friend':
+        key = types.InlineKeyboardMarkup()
+        btn0 = types.InlineKeyboardButton(text='Back to the main', callback_data='back_1.3')
+        key.add(btn0)
+        text4_1 = '1.“Don’t make friends who are comfortable to be with. Make friends who will force you to lever yourself up.” - Thomas J. Watson\n'
+        text4_2 = '2.“They may forget what you said, but they will never forget how you made them feel.” - Carl W. Buechner\n'
+        text4_3 = '3.“A real friend is one who walks in when the rest of the world walks out.” - Walter Winchell\n'
+        text4_4 = '4.“A friend is one who overlooks your broken fence and admires the flowers in your garden.” - Unknown'
+        text4 = text4_1,text4_2,text4_3,text4_4
+        bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.id, text=text4, reply_markup=key)
+    elif call.data == 'motiv':
+        key = types.InlineKeyboardMarkup()
+        btn0 = types.InlineKeyboardButton(text='Back to the main', callback_data='back_1.4')
+        key.add(btn0)
+        text5_1 = '1.“Learn as if you will live forever, live like you will die tomorrow.” - Mahatma Gandhi\n'
+        text5_2 = '2.“When you change your thoughts, remember to also change your world.” - Norman Vincent Peale\n'
+        text5_3 = '3.“Success is not final; failure is not fatal: it is the courage to continue that counts.” - Winston Churchill\n'
+        text5_4 = '4."It is better to fail in originality than to succeed in imitation." - Herman Melville\n'
+        text5 = text5_1,text5_2,text5_3,text5_4
+        bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.id, text=text5, reply_markup=key)
+    elif call.data == 'back_1':
+        key1 = types.InlineKeyboardMarkup()
+        btn1 = types.InlineKeyboardButton(text='Business', callback_data='buss')
+        btn2 = types.InlineKeyboardButton(text='Love', callback_data='love')
+        btn3 = types.InlineKeyboardButton(text='Friends', callback_data='fried')
+        btn4 = types.InlineKeyboardButton(text='Motivation', callback_data='motiv')
+        btn0 = types.InlineKeyboardButton(text='Back to the main', callback_data='back_1')
+        key1.add(btn1,btn2)
+        key1.add(btn3,btn4)
+        key1.add(btn0)
+        text1 = 'Choose the category of 📖 Quotes:'
+        bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.id, text=text1, reply_markup=key1)
+
+def help(call):
+    if call.data == "help":
+        key = types.InlineKeyboardMarkup()
+        btn1 = types.InlineKeyboardButton(text='Cho zdes ne ponatno Blet!\nClick on 📖 Quotes button')
+        btn2 = types.InlineKeyboardButton(text='Back to the main', callback_data='back_2')
+        key.add(btn1)
+        key.add(btn2)
+        bot.edit_message_reply_markup(chat_id=call.message.chat.id, message_id=call.message.id, reply_markup=key)
+
+def about(call):
+    if call.data == "about":
+        key = types.InlineKeyboardMarkup()
+        btn1 = types.InlineKeyboardButton(text='This bot is a child of a student\nWho learns programming in TJK-Dushanbe.')
+        btn2 = types.InlineKeyboardButton(text="It's simple bot where you can find quotes for your heart.")
+        key.add(btn1)
+        key.add(btn2)
+        bot.edit_message_reply_markup(chat_id=call.message.chat.id, message_id=call.message.id, reply_markup=key)
+
+
+
+bot.infinity_polling()
