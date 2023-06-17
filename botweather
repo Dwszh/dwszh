@@ -1,12 +1,12 @@
 import telebot
 import requests
 import json
-bot = telebot.Telebot('6238394380:AAG3WwGvOBnWVoNj3b7YBM28I7yxORjzpAo')
+bot = telebot.TeleBot('6238394380:AAG3WwGvOBnWVoNj3b7YBM28I7yxORjzpAo')
 API = 'fb0bc49026eb32d96d4b7f0a18d51c50'
 
 
 
-@bot.massage_handler(commands=['start'])
+@bot.message_handler(commands=['start'])
 def start (message):
     bot.send_message(message.chat.id, 'Привет, рад тебя видеть! Напиши название города')
 
